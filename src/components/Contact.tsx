@@ -8,37 +8,26 @@ const Contact = () => {
     phone: '',
     message: ''
   });
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('loading');
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-      } else {
-        setStatus('error');
-      }
-    } catch (error) {
-      setStatus('error');
-    }
+    
+    // Format the message for Gmail
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=heavensliving@gmail.com&su=Contact Form Submission from ${formData.name}&body=Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0AMessage: ${formData.message}`;
+    
+    // Open Gmail in new tab
+    window.open(gmailLink, '_blank');
+    
+    // Clear form
+    setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
+  // Alternative: Using Formspree
+  // Just change the form's action to your Formspree endpoint
+  // <form action="https://formspree.io/f/your-form-id" method="POST">
+
   return (
-    <section
-      id='contact' 
-      className="bg-white py-20 md:py-32"
-    >
+    <section id='contact' className="bg-white py-20 md:py-32">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -80,7 +69,12 @@ const Contact = () => {
                   </svg>
                   <div>
                     <h4 className="font-medium">Email</h4>
-                    <p className="text-gray-600">heavensliving@gmail.com</p>
+                    <a 
+                      href="mailto:heavensliving@gmail.com"
+                      className="text-gray-600 hover:text-gray-800 transition-colors"
+                    >
+                      heavensliving@gmail.com
+                    </a>
                   </div>
                 </div>
 
@@ -90,7 +84,12 @@ const Contact = () => {
                   </svg>
                   <div>
                     <h4 className="font-medium">Phone</h4>
-                    <p className="text-gray-600">+91 8660796594</p>
+                    <a 
+                      href="tel:+918660796594"
+                      className="text-gray-600 hover:text-gray-800 transition-colors"
+                    >
+                      +91 8660796594
+                    </a>
                   </div>
                 </div>
               </div>
@@ -163,18 +162,10 @@ const Contact = () => {
 
               <button
                 type="submit"
-                disabled={status === 'loading'}
-                className="w-full px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors disabled:bg-gray-400"
+                className="w-full px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors"
               >
-                {status === 'loading' ? 'Sending...' : 'Send Message'}
+                Send Message
               </button>
-
-              {status === 'success' && (
-                <p className="text-green-600 text-center">Message sent successfully!</p>
-              )}
-              {status === 'error' && (
-                <p className="text-red-600 text-center">Failed to send message. Please try again.</p>
-              )}
             </motion.form>
           </div>
         </motion.div>

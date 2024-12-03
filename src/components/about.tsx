@@ -83,7 +83,7 @@ const AboutUs = () => {
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
               }}
             />
-            <motion.div 
+            {/* <motion.div 
               className="absolute bottom-4 right-4 text-right text-gray-500 text-sm bg-white/80 p-2 rounded-lg"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -91,7 +91,7 @@ const AboutUs = () => {
             >
               <p>Brian Halligan</p>
               <p>Dharmesh Shah</p>
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
       </motion.section>
