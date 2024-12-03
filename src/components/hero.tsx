@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import heroBg from "../assets/hero-bg.webp";
 import arrow from "../assets/arrow.svg";
 import BookingModal from "./BookingModal";
-import appApk from "../assets/apk/Heavens_LIving.apk";
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -24,18 +23,6 @@ const Hero = () => {
     return () => clearInterval(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const handleDownload = () => {
-    // Create a link element
-    const link = document.createElement('a');
-    link.href = appApk;
-    link.download = 'Heavens_LIving.apk';
-    
-    // Trigger download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
 
   return (
     <section
@@ -103,24 +90,28 @@ const Hero = () => {
           }}
           className="mt-[55.5px] flex w-full flex-col items-center justify-center gap-6 md:flex-row lg:justify-start"
         >
+
+          {/* Book Now button */}
           <button
             onClick={() => setIsModalOpen(true)}
             className="group relative h-[56px] w-[180px] overflow-hidden rounded-full border-2 border-[#131316] text-base font-medium leading-[28px] text-[#445568] shadow-[0_1px_2px_0_rgba(14,24,41,0.05)] md:h-[60px] md:w-[202px] md:text-[18px]">
             <div className="absolute -left-1 bottom-0 right-0 -z-10 !mx-auto h-[0px] w-[207px] rounded-full bg-black transition-all duration-300 group-hover:h-[59px]" />
             <span className="group-hover:text-white">Book Now</span>
           </button>
-
-          {/* <button className="flex h-[56px] w-[180px] items-center justify-center gap-3 rounded-full text-base font-medium leading-[28px] text-[#445568] underline-offset-8 transition-all hover:underline md:h-[60px] md:w-[202px] md:text-[18px]">
-            <span>Download App</span>
-            <img src={arrow} alt="" />
-          </button> */}
-           <button 
-            onClick={handleDownload}
-            className="flex h-[56px] w-[180px] items-center justify-center gap-3 rounded-full text-base font-medium leading-[28px] text-[#445568] underline-offset-8 transition-all hover:underline md:h-[60px] md:w-[202px] md:text-[18px]"
-          >
-            <span>Download App</span>
-            <img src={arrow} alt="" />
-          </button>
+          
+          {/* Button for downloading the apk file */}
+          <a 
+            href="https://drive.google.com/drive/folders/1KKlyvz-2pkY2yt5FZo-xlQRd3iTNrd79?usp=sharing" 
+            target="_blank" 
+            rel="noopener noreferrer">
+              <button
+                className="flex h-[56px] w-[180px] items-center justify-center gap-3 rounded-full text-base font-medium leading-[28px] text-[#445568] underline-offset-8 transition-all hover:underline md:h-[60px] md:w-[202px] md:text-[18px]"
+              >
+                <span>Download App</span>
+                <img src={arrow} alt="arrow" />
+              </button>
+          </a>
+           
         </motion.div>
       </div>
 
@@ -159,8 +150,15 @@ const Hero = () => {
             transition={{ delay: 0.5, duration: 0.3, type: "spring" }}
             className="absolute top-8 right-8 z-20"
           >
-            <button className="group relative w-14 h-14 md:w-16 md:h-16 bg-white/50 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
-              {/* Tilted Triangle Play Icon */}
+            <a 
+              href="https://www.instagram.com/heavensliving/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <button className="group relative w-14 h-14 md:w-16 md:h-16 bg-white/50 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+
+                {/* Tilted Triangle Play Icon */}
               
                 <div className="w-0 h-0 
                   border-t-[8px] border-t-transparent
@@ -168,11 +166,10 @@ const Hero = () => {
                   border-b-[8px] border-b-transparent
                   translate-x-[2px]"
                 />
-                
-
-              {/* Ripple Effect */}
-              <div className="absolute inset-0 rounded-full bg-white/30 group-hover:scale-150 transition-transform duration-500" />
-            </button>
+                {/* Ripple Effect */}
+                <div className="absolute inset-0 rounded-full bg-white/30 group-hover:scale-150 transition-transform duration-500" />
+              </button>
+            </a>
           </motion.div>
           
           {/* Carousel Indicators */}

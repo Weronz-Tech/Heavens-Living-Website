@@ -9,7 +9,6 @@ import SmoothScrolling from "./components/smooth-scrolling";
 // import Testimonials from './components/Testimonials'
 import Amenities from "./components/Amenities";
 import Contact from "./components/Contact";
-// import FirstCTA from "./components/first-cta";
 
 function App() {
   return (
